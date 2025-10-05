@@ -1,0 +1,301 @@
+Date,Description,Amount,Category,Balance,Anomaly
+2025-04-09,Gas station refill,993.19,Entertainment,993.19,False
+2025-04-10,Grocery shopping at Walmart,735.26,Entertainment,1728.45,False
+2025-04-10,Utility bill - Electric,565.05,Rent,2293.5,False
+2025-04-10,Utility bill - Electric,-161.4,Miscellaneous,2132.1,False
+2025-04-10,Movie tickets,138.55,Salary,2270.65,False
+2025-04-10,Miscellaneous expense,-420.86,Utilities,1849.79,False
+2025-04-11,Rent payment,833.56,Unspecified,2683.35,False
+2025-04-11,Miscellaneous expense,531.05,Rent,3214.4,False
+2025-04-11,Miscellaneous expense,28.19,Unspecified,3242.59,False
+2025-04-13,Gas station refill,292.91,Rent,3535.5,False
+2025-04-15,Gas station refill,80.69,Entertainment,3616.19,False
+2025-04-16,Utility bill - Electric,260.74,Groceries,3876.93,False
+2025-04-16,Dinner at restaurant,440.78,Rent,4317.71,False
+2025-04-16,Salary deposit,306.94,Entertainment,4624.65,False
+2025-04-18,Rent payment,173.09,Utilities,4797.74,False
+2025-04-18,Gas station refill,-157.68,Entertainment,4640.06,False
+2025-04-18,Movie tickets,-146.14,Unspecified,4493.92,False
+2025-04-20,Utility bill - Electric,723.86,Entertainment,5217.78,False
+2025-04-22,Dinner at restaurant,487.39,Unspecified,5705.17,False
+2025-04-22,Dinner at restaurant,837.79,Utilities,6542.96,False
+2025-04-22,Salary deposit,-122.27,Entertainment,6420.69,False
+2025-04-22,Rent payment,-323.09,Entertainment,6097.6,False
+2025-04-22,Movie tickets,172.56,Miscellaneous,6270.16,False
+2025-04-24,Rent payment,842.18,Transportation,7112.34,False
+2025-04-24,Grocery shopping at Walmart,230.33,Rent,7342.67,False
+2025-04-24,Salary deposit,890.14,Entertainment,8232.81,False
+2025-04-24,Dinner at restaurant,-130.84,Rent,8101.97,False
+2025-04-25,Utility bill - Electric,250.77,Rent,8352.74,False
+2025-04-25,Salary deposit,231.17,Utilities,8583.91,False
+2025-04-27,Movie tickets,211.57,Unspecified,8795.48,False
+2025-04-29,Utility bill - Electric,191.97,Rent,8987.45,False
+2025-04-30,Grocery shopping at Walmart,854.83,Entertainment,9842.28,False
+2025-05-04,Dinner at restaurant,582.24,Rent,10424.52,False
+2025-05-04,Rent payment,24.41,Entertainment,10448.93,False
+2025-05-05,Grocery shopping at Walmart,365.71,Salary,10814.64,False
+2025-05-05,Salary deposit,288.35,Unspecified,11102.99,False
+2025-05-06,Dinner at restaurant,674.55,Rent,11777.54,False
+2025-05-07,Grocery shopping at Walmart,580.28,Miscellaneous,12357.82,False
+2025-05-07,Utility bill - Electric,90.42,Utilities,12448.24,False
+2025-05-08,Rent payment,-399.44,Utilities,12048.8,False
+2025-05-08,Salary deposit,-300.57,Groceries,11748.23,False
+2025-05-09,Grocery shopping at Walmart,-201.7,Transportation,11546.53,False
+2025-05-09,Movie tickets,890.5,Entertainment,12437.03,False
+2025-05-09,Utility bill - Electric,816.5,Rent,13253.53,False
+2025-05-10,Salary deposit,172.19,Groceries,13425.72,False
+2025-05-10,Movie tickets,235.96,Miscellaneous,13661.68,False
+2025-05-11,Dinner at restaurant,299.73,Transportation,13961.41,False
+2025-05-11,Utility bill - Electric,20.38,Rent,13981.79,False
+2025-05-11,Movie tickets,-258.97,Groceries,13722.82,False
+2025-05-11,Movie tickets,460.46,Miscellaneous,14183.28,False
+2025-05-13,Dinner at restaurant,646.14,Groceries,14829.42,False
+2025-05-13,Movie tickets,314.79,Entertainment,15144.21,False
+2025-05-14,Grocery shopping at Walmart,432.52,Rent,15576.73,False
+2025-05-15,Salary deposit,550.26,Unspecified,16126.99,False
+2025-05-15,Salary deposit,450.81,Entertainment,16577.8,False
+2025-05-15,Salary deposit,-406.93,Rent,16170.87,False
+2025-05-16,Rent payment,861.5,Transportation,17032.37,False
+2025-05-16,Miscellaneous expense,-105.96,Transportation,16926.41,False
+2025-05-16,Utility bill - Electric,-400.99,Salary,16525.42,False
+2025-05-17,Rent payment,-190.65,Transportation,16334.77,False
+2025-05-18,Salary deposit,-403.91,Rent,15930.86,False
+2025-05-18,Rent payment,49.76,Entertainment,15980.62,False
+2025-05-19,Gas station refill,15.43,Groceries,15996.05,False
+2025-05-19,Movie tickets,609.02,Entertainment,16605.07,False
+2025-05-19,Grocery shopping at Walmart,978.23,Entertainment,17583.3,False
+2025-05-20,Miscellaneous expense,528.49,Utilities,18111.79,False
+2025-05-21,Movie tickets,759.92,Salary,18871.71,False
+2025-05-21,Movie tickets,60.32,Entertainment,18932.03,False
+2025-05-21,Gas station refill,-444.13,Salary,18487.9,False
+2025-05-21,Utility bill - Electric,177.25,Rent,18665.15,False
+2025-05-22,Grocery shopping at Walmart,41.98,Utilities,18707.13,False
+2025-05-22,Miscellaneous expense,-93.29,Miscellaneous,18613.84,False
+2025-05-22,Miscellaneous expense,-379.59,Unspecified,18234.25,False
+2025-05-23,Gas station refill,595.83,Rent,18830.08,False
+2025-05-24,Grocery shopping at Walmart,994.18,Entertainment,19824.26,False
+2025-05-24,Salary deposit,706.03,Entertainment,20530.29,False
+2025-05-24,Utility bill - Electric,579.21,Unspecified,21109.5,False
+2025-05-24,Utility bill - Electric,727.41,Utilities,21836.91,False
+2025-05-25,Grocery shopping at Walmart,875.61,Salary,22712.52,False
+2025-05-26,Salary deposit,-290.19,Utilities,22422.33,False
+2025-05-26,Dinner at restaurant,952.17,Rent,23374.5,False
+2025-05-27,Salary deposit,22.95,Entertainment,23397.45,False
+2025-05-27,Dinner at restaurant,-172.57,Miscellaneous,23224.88,False
+2025-05-28,Rent payment,20.14,Salary,23245.02,False
+2025-05-28,Grocery shopping at Walmart,437.99,Transportation,23683.01,False
+2025-05-29,Miscellaneous expense,488.95,Entertainment,24171.96,False
+2025-05-29,Salary deposit,927.98,Unspecified,25099.94,False
+2025-05-30,Utility bill - Electric,709.33,Salary,25809.27,False
+2025-05-30,Grocery shopping at Walmart,65.36,Entertainment,25874.63,False
+2025-05-31,Rent payment,478.41,Entertainment,26353.04,False
+2025-06-02,Salary deposit,190.67,Entertainment,26543.71,False
+2025-06-02,Miscellaneous expense,920.97,Rent,27464.68,False
+2025-06-03,Utility bill - Electric,315.92,Unspecified,27780.6,False
+2025-06-05,Utility bill - Electric,302.14,Rent,28082.74,False
+2025-06-05,Movie tickets,740.46,Entertainment,28823.2,False
+2025-06-05,Utility bill - Electric,653.59,Utilities,29476.79,False
+2025-06-06,Miscellaneous expense,757.96,Rent,30234.75,False
+2025-06-06,Utility bill - Electric,754.25,Groceries,30989.0,False
+2025-06-06,Movie tickets,-154.2,Entertainment,30834.8,False
+2025-06-07,Miscellaneous expense,382.66,Salary,31217.46,False
+2025-06-07,Movie tickets,-142.24,Unspecified,31075.22,False
+2025-06-08,Movie tickets,159.53,Utilities,31234.75,False
+2025-06-10,Rent payment,461.3,Utilities,31696.05,False
+2025-06-10,Miscellaneous expense,385.08,Entertainment,32081.13,False
+2025-06-11,Salary deposit,40.74,Entertainment,32121.87,False
+2025-06-11,Grocery shopping at Walmart,-392.71,Rent,31729.16,False
+2025-06-11,Dinner at restaurant,441.3,Entertainment,32170.46,False
+2025-06-12,Miscellaneous expense,969.1,Entertainment,33139.56,False
+2025-06-12,Salary deposit,644.23,Entertainment,33783.79,False
+2025-06-13,Grocery shopping at Walmart,537.57,Utilities,34321.36,False
+2025-06-13,Dinner at restaurant,462.35,Entertainment,34783.71,False
+2025-06-13,Movie tickets,408.52,Miscellaneous,35192.23,False
+2025-06-13,Utility bill - Electric,942.97,Entertainment,36135.2,False
+2025-06-14,Dinner at restaurant,113.98,Rent,36249.18,False
+2025-06-15,Salary deposit,746.31,Groceries,36995.49,False
+2025-06-15,Grocery shopping at Walmart,-430.54,Rent,36564.95,False
+2025-06-15,Movie tickets,377.11,Rent,36942.06,False
+2025-06-15,Salary deposit,808.79,Rent,37750.85,False
+2025-06-16,Gas station refill,642.47,Utilities,38393.32,False
+2025-06-17,Salary deposit,-127.94,Miscellaneous,38265.38,False
+2025-06-17,Gas station refill,394.62,Utilities,38660.0,False
+2025-06-18,Gas station refill,669.56,Unspecified,39329.56,False
+2025-06-18,Utility bill - Electric,944.5,Groceries,40274.06,False
+2025-06-18,Miscellaneous expense,125.7,Entertainment,40399.76,False
+2025-06-19,Miscellaneous expense,324.83,Transportation,40724.59,False
+2025-06-19,Dinner at restaurant,-372.4,Miscellaneous,40352.19,False
+2025-06-20,Miscellaneous expense,-345.57,Transportation,40006.62,False
+2025-06-20,Utility bill - Electric,179.0,Salary,40185.62,False
+2025-06-20,Utility bill - Electric,253.44,Entertainment,40439.06,False
+2025-06-21,Rent payment,790.77,Miscellaneous,41229.83,False
+2025-06-21,Gas station refill,310.0,Transportation,41539.83,False
+2025-06-22,Salary deposit,492.99,Rent,42032.82,False
+2025-06-23,Gas station refill,877.82,Transportation,42910.64,False
+2025-06-24,Miscellaneous expense,997.99,Rent,43908.63,False
+2025-06-24,Salary deposit,735.52,Utilities,44644.15,False
+2025-06-25,Rent payment,488.07,Utilities,45132.22,False
+2025-06-25,Gas station refill,78.01,Entertainment,45210.23,False
+2025-06-26,Miscellaneous expense,-376.61,Entertainment,44833.62,False
+2025-06-26,Gas station refill,648.15,Salary,45481.77,False
+2025-06-26,Rent payment,-311.48,Entertainment,45170.29,False
+2025-06-28,Miscellaneous expense,705.29,Miscellaneous,45875.58,False
+2025-06-28,Utility bill - Electric,608.19,Utilities,46483.77,False
+2025-06-29,Rent payment,511.09,Utilities,46994.86,False
+2025-06-30,Miscellaneous expense,564.97,Entertainment,47559.83,False
+2025-06-30,Movie tickets,-102.37,Unspecified,47457.46,False
+2025-06-30,Salary deposit,997.98,Transportation,48455.44,False
+2025-07-01,Gas station refill,-310.15,Transportation,48145.29,False
+2025-07-01,Salary deposit,876.09,Groceries,49021.38,False
+2025-07-01,Dinner at restaurant,677.56,Transportation,49698.94,False
+2025-07-02,Movie tickets,713.2,Groceries,50412.14,False
+2025-07-03,Movie tickets,748.85,Groceries,51160.99,False
+2025-07-03,Grocery shopping at Walmart,40.07,Rent,51201.06,False
+2025-07-03,Grocery shopping at Walmart,-135.6,Rent,51065.46,False
+2025-07-04,Grocery shopping at Walmart,126.05,Rent,51191.51,False
+2025-07-05,Gas station refill,322.99,Groceries,51514.5,False
+2025-07-05,Movie tickets,531.78,Unspecified,52046.28,False
+2025-07-07,Miscellaneous expense,-70.49,Rent,51975.79,False
+2025-07-08,Movie tickets,-201.25,Groceries,51774.54,False
+2025-07-08,Dinner at restaurant,-32.75,Miscellaneous,51741.79,False
+2025-07-09,Grocery shopping at Walmart,347.46,Unspecified,52089.25,False
+2025-07-11,Salary deposit,661.61,Miscellaneous,52750.86,False
+2025-07-11,Rent payment,975.76,Utilities,53726.62,False
+2025-07-12,Salary deposit,844.37,Miscellaneous,54570.99,False
+2025-07-12,Gas station refill,-374.35,Miscellaneous,54196.64,False
+2025-07-13,Rent payment,800.51,Unspecified,54997.15,False
+2025-07-13,Salary deposit,-92.07,Salary,54905.08,False
+2025-07-14,Gas station refill,-459.95,Utilities,54445.13,False
+2025-07-14,Salary deposit,-32.92,Unspecified,54412.21,False
+2025-07-15,Dinner at restaurant,-202.29,Groceries,54209.92,False
+2025-07-16,Gas station refill,566.87,Miscellaneous,54776.79,False
+2025-07-17,Miscellaneous expense,209.39,Miscellaneous,54986.18,False
+2025-07-17,Grocery shopping at Walmart,177.89,Rent,55164.07,False
+2025-07-18,Grocery shopping at Walmart,415.28,Entertainment,55579.35,False
+2025-07-18,Gas station refill,344.87,Miscellaneous,55924.22,False
+2025-07-19,Gas station refill,-74.55,Entertainment,55849.67,False
+2025-07-20,Miscellaneous expense,-449.5,Transportation,55400.17,False
+2025-07-21,Salary deposit,782.43,Transportation,56182.6,False
+2025-07-21,Movie tickets,738.87,Entertainment,56921.47,False
+2025-07-22,Utility bill - Electric,897.32,Entertainment,57818.79,False
+2025-07-22,Gas station refill,925.74,Rent,58744.53,False
+2025-07-23,Rent payment,954.17,Unspecified,59698.7,False
+2025-07-23,Grocery shopping at Walmart,367.71,Miscellaneous,60066.41,False
+2025-07-27,Rent payment,-321.56,Groceries,59744.85,False
+2025-07-27,Rent payment,-211.86,Transportation,59532.99,False
+2025-07-27,Salary deposit,664.42,Transportation,60197.41,False
+2025-07-27,Miscellaneous expense,128.57,Entertainment,60325.98,False
+2025-07-30,Utility bill - Electric,508.72,Entertainment,60834.7,False
+2025-07-30,Utility bill - Electric,888.87,Transportation,61723.57,False
+2025-07-30,Rent payment,-465.69,Salary,61257.88,False
+2025-07-30,Gas station refill,653.89,Rent,61911.77,False
+2025-08-01,Gas station refill,645.12,Salary,62556.89,False
+2025-08-03,Grocery shopping at Walmart,-332.5,Entertainment,62224.39,False
+2025-08-04,Dinner at restaurant,-43.94,Entertainment,62180.45,False
+2025-08-04,Miscellaneous expense,244.62,Groceries,62425.07,False
+2025-08-05,Utility bill - Electric,533.18,Miscellaneous,62958.25,False
+2025-08-05,Rent payment,243.69,Miscellaneous,63201.94,False
+2025-08-06,Miscellaneous expense,564.97,Groceries,63766.91,False
+2025-08-07,Gas station refill,-178.24,Entertainment,63588.67,False
+2025-08-07,Miscellaneous expense,-2.35,Salary,63586.32,False
+2025-08-09,Dinner at restaurant,653.41,Miscellaneous,64239.73,False
+2025-08-09,Dinner at restaurant,574.19,Utilities,64813.92,False
+2025-08-09,Dinner at restaurant,445.49,Salary,65259.41,False
+2025-08-09,Utility bill - Electric,770.86,Miscellaneous,66030.27,False
+2025-08-10,Dinner at restaurant,984.07,Miscellaneous,67014.34,False
+2025-08-10,Grocery shopping at Walmart,301.73,Miscellaneous,67316.07,False
+2025-08-11,Gas station refill,838.48,Entertainment,68154.55,False
+2025-08-12,Salary deposit,601.97,Entertainment,68756.52,False
+2025-08-14,Movie tickets,607.87,Entertainment,69364.39,False
+2025-08-14,Movie tickets,-238.97,Entertainment,69125.42,False
+2025-08-15,Grocery shopping at Walmart,794.54,Entertainment,69919.96,False
+2025-08-17,Gas station refill,994.93,Utilities,70914.89,False
+2025-08-17,Miscellaneous expense,900.8,Transportation,71815.69,False
+2025-08-18,Miscellaneous expense,993.47,Salary,72809.16,False
+2025-08-19,Grocery shopping at Walmart,-411.39,Transportation,72397.77,False
+2025-08-20,Gas station refill,-16.76,Salary,72381.01,False
+2025-08-22,Dinner at restaurant,423.86,Groceries,72804.87,False
+2025-08-22,Rent payment,314.29,Miscellaneous,73119.16,False
+2025-08-23,Rent payment,-68.49,Rent,73050.67,False
+2025-08-23,Utility bill - Electric,-138.57,Rent,72912.1,False
+2025-08-24,Dinner at restaurant,635.7,Entertainment,73547.8,False
+2025-08-24,Dinner at restaurant,396.8,Entertainment,73944.6,False
+2025-08-25,Gas station refill,493.13,Entertainment,74437.73,False
+2025-08-25,Miscellaneous expense,-357.36,Entertainment,74080.37,False
+2025-08-26,Salary deposit,180.79,Transportation,74261.16,False
+2025-08-26,Rent payment,940.01,Salary,75201.17,False
+2025-08-27,Grocery shopping at Walmart,714.44,Rent,75915.61,False
+2025-08-27,Utility bill - Electric,-273.63,Unspecified,75641.98,False
+2025-08-27,Miscellaneous expense,-328.8,Salary,75313.18,False
+2025-08-27,Dinner at restaurant,80.46,Entertainment,75393.64,False
+2025-08-30,Utility bill - Electric,-266.52,Transportation,75127.12,False
+2025-08-30,Miscellaneous expense,944.96,Transportation,76072.08,False
+2025-08-30,Grocery shopping at Walmart,144.32,Groceries,76216.4,False
+2025-08-30,Grocery shopping at Walmart,272.9,Transportation,76489.3,False
+2025-09-01,Gas station refill,401.49,Miscellaneous,76890.79,False
+2025-09-01,Rent payment,560.9,Transportation,77451.69,False
+2025-09-02,Miscellaneous expense,720.31,Entertainment,78172.0,False
+2025-09-02,Gas station refill,-232.59,Groceries,77939.41,False
+2025-09-02,Utility bill - Electric,978.36,Entertainment,78917.77,False
+2025-09-03,Gas station refill,94.58,Utilities,79012.35,False
+2025-09-03,Grocery shopping at Walmart,-364.34,Groceries,78648.01,False
+2025-09-04,Salary deposit,700.49,Unspecified,79348.5,False
+2025-09-04,Gas station refill,-319.26,Unspecified,79029.24,False
+2025-09-04,Utility bill - Electric,986.8,Transportation,80016.04,False
+2025-09-05,Dinner at restaurant,-18.14,Entertainment,79997.9,False
+2025-09-06,Utility bill - Electric,385.63,Groceries,80383.53,False
+2025-09-06,Utility bill - Electric,-375.69,Groceries,80007.84,False
+2025-09-07,Salary deposit,-470.13,Salary,79537.71,False
+2025-09-09,Rent payment,-255.92,Utilities,79281.79,False
+2025-09-10,Dinner at restaurant,-99.72,Entertainment,79182.07,False
+2025-09-11,Movie tickets,803.22,Groceries,79985.29,False
+2025-09-11,Miscellaneous expense,769.58,Salary,80754.87,False
+2025-09-12,Rent payment,-453.27,Groceries,80301.6,False
+2025-09-12,Utility bill - Electric,-330.15,Utilities,79971.45,False
+2025-09-13,Rent payment,606.65,Rent,80578.1,False
+2025-09-13,Miscellaneous expense,366.14,Transportation,80944.24,False
+2025-09-14,Movie tickets,-232.54,Rent,80711.7,False
+2025-09-14,Grocery shopping at Walmart,547.07,Miscellaneous,81258.77,False
+2025-09-15,Dinner at restaurant,189.1,Entertainment,81447.87,False
+2025-09-15,Miscellaneous expense,-42.87,Entertainment,81405.0,False
+2025-09-15,Utility bill - Electric,431.05,Groceries,81836.05,False
+2025-09-16,Miscellaneous expense,298.56,Miscellaneous,82134.61,False
+2025-09-16,Salary deposit,166.07,Groceries,82300.68,False
+2025-09-17,Rent payment,-346.53,Unspecified,81954.15,False
+2025-09-18,Rent payment,735.31,Utilities,82689.46,False
+2025-09-18,Movie tickets,119.92,Salary,82809.38,False
+2025-09-19,Utility bill - Electric,645.63,Transportation,83455.01,False
+2025-09-19,Grocery shopping at Walmart,767.11,Unspecified,84222.12,False
+2025-09-20,Salary deposit,169.87,Salary,84391.99,False
+2025-09-20,Dinner at restaurant,-404.23,Rent,83987.76,False
+2025-09-21,Utility bill - Electric,842.62,Utilities,84830.38,False
+2025-09-21,Movie tickets,768.91,Groceries,85599.29,False
+2025-09-22,Miscellaneous expense,901.91,Transportation,86501.2,False
+2025-09-22,Salary deposit,446.13,Unspecified,86947.33,False
+2025-09-22,Rent payment,-117.11,Groceries,86830.22,False
+2025-09-23,Dinner at restaurant,332.02,Unspecified,87162.24,False
+2025-09-24,Salary deposit,107.23,Utilities,87269.47,False
+2025-09-24,Grocery shopping at Walmart,-148.42,Miscellaneous,87121.05,False
+2025-09-24,Salary deposit,-239.28,Miscellaneous,86881.77,False
+2025-09-25,Utility bill - Electric,-330.14,Transportation,86551.63,False
+2025-09-25,Movie tickets,723.47,Groceries,87275.1,False
+2025-09-25,Rent payment,113.11,Entertainment,87388.21,False
+2025-09-25,Miscellaneous expense,-497.25,Unspecified,86890.96,False
+2025-09-26,Dinner at restaurant,540.13,Entertainment,87431.09,False
+2025-09-26,Movie tickets,392.78,Transportation,87823.87,False
+2025-09-27,Salary deposit,681.94,Salary,88505.81,False
+2025-09-28,Dinner at restaurant,973.53,Rent,89479.34,False
+2025-09-28,Gas station refill,297.35,Salary,89776.69,False
+2025-09-29,Grocery shopping at Walmart,445.01,Transportation,90221.7,False
+2025-09-30,Gas station refill,-270.33,Miscellaneous,89951.37,False
+2025-09-30,Miscellaneous expense,-152.7,Groceries,89798.67,False
+2025-09-30,Movie tickets,744.88,Groceries,90543.55,False
+2025-10-03,Salary deposit,108.64,Unspecified,90652.19,False
+2025-10-03,Miscellaneous expense,741.25,Rent,91393.44,False
+2025-10-03,Movie tickets,508.0,Salary,91901.44,False
+2025-10-04,Rent payment,-466.17,Utilities,91435.27,False
+2025-10-04,Rent payment,-312.77,Entertainment,91122.5,False
+2025-10-04,Rent payment,87.39,Entertainment,91209.89,False
+2025-10-05,Utility bill - Electric,-404.24,Unspecified,90805.65,False
+2025-10-06,Salary deposit,171.61,Unspecified,90977.26,False
+2025-10-06,Dinner at restaurant,603.56,Utilities,91580.82,False

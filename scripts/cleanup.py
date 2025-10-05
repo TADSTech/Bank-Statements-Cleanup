@@ -1,162 +1,194 @@
+# Automated cleaning script for bank statements.
+# This script reads the messy CSV, standardizes dates to YYYY-MM-DD,
+# trims extra spaces and fixes typos in descriptions,
+# ensures amounts are floats (fills missing with 0),
+# standardizes categories to title case (fills missing with 'Uncategorized'),
+# and outputs a cleaned CSV.
+
+import os
+import re
+import logging
+from datetime import datetime
+from dateutil.parser import parse
 import pandas as pd
 import numpy as np
-import re
-from dateutil import parser as dtpr
-from fuzzywuzzy import fuzz, process
-import charset_normalizer
-import os
 
-def check_file_encoding(file_path):
-    """Check the encoding of the input file."""
+"""
+Personal Finance Tracker - automated cleaning script
+- Normalizes dates to YYYY-MM-DD
+- Cleans descriptions (reverses common obfuscation, trims)
+- Cleans amounts (removes currency chars, preserves NaNs, interpolates)
+- Standardizes categories using synonyms + fuzzy matching
+- Computes running balance and monthly summaries
+- Flags anomalous transactions
+- Outputs cleaned CSV and monthly summary CSV into ../data/cleaned/
+"""
+
+logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
+
+BASE_DIR = os.path.normpath(os.path.join(os.path.dirname(__file__), '..'))
+RAW_PATH = os.path.join(BASE_DIR, 'data', 'raw', 'messy_bank_statements.csv')
+CLEAN_DIR = os.path.join(BASE_DIR, 'data', 'cleaned')
+os.makedirs(CLEAN_DIR, exist_ok=True)
+CLEANED_CSV = os.path.join(CLEAN_DIR, 'cleaned_bank_statements.csv')
+MONTHLY_SUMMARY_CSV = os.path.join(CLEAN_DIR, 'monthly_summary.csv')
+
+# Valid categories + synonyms
+VALID_CATEGORIES = ['Groceries', 'Utilities', 'Entertainment', 'Salary', 'Rent', 'Transportation', 'Dining Out', 'Miscellaneous', 'Unspecified']
+SYNONYM_MAP = {
+    'Groceries': ['food', 'grocery', 'grocer', 'supermarket', 'groc3ry', 'groc3ry shopping'],
+    'Utilities': ['utility', 'utilities', 'electric', 'el3ctric', 'water', 'gas bill'],
+    'Entertainment': ['movie', 'movietickets', 'movieticket', 'movi3', 'concert', 'streaming', 'dining out'],
+    'Salary': ['salary', 'salaray', 's@l@ry', 'payroll', 'paycheck', 'deposit'],
+    'Rent': ['rent', 'r3nt', 'landlord', 'lease'],
+    'Transportation': ['gas', 'g@s', 'gas station', 'transportation'],
+    'Dining Out': ['dinner', 'restaurant', 'dinn3r'],
+    'Miscellaneous': ['misc', 'miscellaneous', 'unspecified']
+}
+# reverse sync
+SYN_TO_CAT = {syn.lower(): cat for cat, lst in SYNONYM_MAP.items() for syn in lst}
+
+# fuzzy matching fallback (use python's built-in difflib to avoid extra dependencies)
+from difflib import get_close_matches
+
+def standardize_date(s):
+    if pd.isna(s):
+        return pd.NaT
     try:
-        with open(file_path, 'rb') as rawdata:
-            result = charset_normalizer.detect(rawdata.read(15000))
-        print(f"File encoding: {result}")
-        return result
-    except FileNotFoundError:
-        raise FileNotFoundError(f"Input file {file_path} not found.")
+        # strip and try to parse
+        return parse(str(s).strip(), dayfirst=False, yearfirst=False).date()
+    except Exception:
+        # try common alternative formats
+        for fmt in ("%d/%m/%Y", "%d-%m-%Y", "%d/%m/%y", "%Y/%m/%d", "%d-%b-%Y", "%d-%B-%Y"):
+            try:
+                return datetime.strptime(str(s).strip(), fmt).date()
+            except Exception:
+                continue
+    return pd.NaT
 
-def standardize_date(date_str):
-    """
-    Standardize date strings to 'DD/MM/YY' format.
-    Args:
-        date_str: Input date string.
-    Returns:
-        Formatted date string or NaN if invalid.
-    """
-    if pd.isna(date_str) or not isinstance(date_str, str) or date_str.strip() == '':
+def clean_description(s):
+    if pd.isna(s):
+        return "Unspecified"
+    s = str(s).strip()
+    # reverse common obfuscation
+    s = s.replace('@', 'a').replace('3', 'e').replace('0', 'o').replace('$', 's').replace('5', 's')
+    # remove repeated non-alphanumeric (except spaces and punctuation)
+    s = re.sub(r'[^A-Za-z0-9\-\.,& ]+', '', s)
+    s = re.sub(r'\s+', ' ', s).strip()
+    return s
+
+def clean_amount(a):
+    if pd.isna(a) or str(a).strip() == '':
         return np.nan
+    s = str(a)
+    # remove currency symbols and thousands separators
+    s = re.sub(r'[^\d\.\-]', '', s)
+    # collapse multiple dots
+    s = re.sub(r'\.{2,}', '.', s)
+    # ensure single leading negative if present
+    if s.count('-') > 1:
+        s = '-' + s.replace('-', '')
     try:
-        parsed_date = dtpr.parse(date_str)
-        return parsed_date.strftime('%d/%m/%y')
-    except (ValueError, TypeError):
+        return round(float(s), 2)
+    except Exception:
         return np.nan
 
-def clean_amount(amount):
-    """
-    Clean amount by removing non-numeric characters and rounding to 2 decimals.
-    Args:
-        amount: Input value.
-    Returns:
-        Float rounded to 2 decimals or NaN if invalid.
-    """
-    if pd.isna(amount) or amount == '':
-        return np.nan
-    amount_str = str(amount)
-    cleaned = re.sub(r'[^\\d.-]', '', amount_str)
-    cleaned = re.sub(r'\\.+', '.', cleaned)
-    if cleaned.count('-') > 1:
-        cleaned = '-' + cleaned.replace('-', '')
-    try:
-        return round(float(cleaned), 2)
-    except ValueError:
-        return np.nan
-
-def clean_category(category, valid_categories, synonym_to_category, threshold=80):
-    """
-    Standardize category using fuzzy matching and synonyms.
-    Args:
-        category: Input category string.
-        valid_categories: List of valid category names.
-        synonym_to_category: Dictionary mapping synonyms to valid categories.
-        threshold: Fuzzy matching score threshold.
-    Returns:
-        Standardized category or 'Unspecified' if no match.
-    """
-    if pd.isna(category) or not isinstance(category, str) or category.strip() == '':
+def clean_category(cat):
+    if pd.isna(cat) or str(cat).strip() == '':
         return 'Unspecified'
-    category_lower = category.lower().strip()
-    if category_lower in synonym_to_category:
-        return synonym_to_category[category_lower]
-    match = process.extractOne(category_lower, valid_categories, scorer=fuzz.ratio)
-    return match[0] if match and match[1] >= threshold else 'Unspecified'
+    c = str(cat).strip().lower()
+    # direct synonym match
+    if c in SYN_TO_CAT:
+        return SYN_TO_CAT[c]
+    # close match among synonyms
+    match = get_close_matches(c, list(SYN_TO_CAT.keys()), n=1, cutoff=0.8)
+    if match:
+        return SYN_TO_CAT[match[0]]
+    # close match among valid categories
+    match2 = get_close_matches(c.title(), VALID_CATEGORIES, n=1, cutoff=0.8)
+    if match2:
+        return match2[0]
+    return 'Unspecified'
 
-def perfect_cleanup(df):
-    """
-    Create a strict version of the dataset by dropping rows with any NaNs,
-    except for Amount, which is interpolated.
-    Args:
-        df: Input DataFrame.
-    Returns:
-        Cleaned DataFrame with no missing values.
-    """
-    df_clean = df.copy()
-    df_clean['Amount'] = df_clean['Amount'].interpolate(method='linear').round(2)
-    df_clean = df_clean.dropna()
-    return df_clean
+def load_and_clean(path):
+    logging.info(f"Loading raw data from: {path}")
+    df = pd.read_csv(path, dtype=str, keep_default_na=False, na_values=['', 'None', 'nan', 'NaN'])
+    # normalize column names
+    df.columns = [c.strip().title() for c in df.columns]
+    # ensure required columns exist
+    for col in ['Date', 'Description', 'Amount', 'Category']:
+        if col not in df.columns:
+            df[col] = np.nan
 
-def clean_bank_data(input_path, output_dir):
-    """
-    Main function to clean bank statements dataset and export results.
-    Args:
-        input_path: Path to the raw CSV file.
-        output_dir: Directory to save cleaned CSV files.
-    """
-    # Set seed for reproducibility
-    np.random.seed(42)
+    # Clean columns
+    df['Date'] = df['Date'].apply(lambda x: standardize_date(x))
+    df['Description'] = df['Description'].apply(clean_description)
+    df['Amount'] = df['Amount'].apply(clean_amount)
+    df['Category'] = df['Category'].apply(clean_category)
 
-    # Check file encoding
-    check_file_encoding(input_path)
+    # convert date to datetime and sort
+    df['Date'] = pd.to_datetime(df['Date'])
+    df = df.sort_values(by='Date').reset_index(drop=True)
 
-    # Load data
-    try:
-        bank_data = pd.read_csv(input_path)
-    except Exception as e:
-        raise Exception(f"Failed to load data: {e}")
+    # Interpolate missing amounts linearly if there are numeric neighbors, otherwise leave NaN
+    if df['Amount'].notna().sum() >= 2:
+        df['Amount'] = df['Amount'].astype(float)
+        df['Amount'] = df['Amount'].interpolate(method='linear').round(2)
 
-    # Log initial missing data
-    missing_data_count = bank_data.isnull().sum()
-    total_cells = np.prod(bank_data.shape)
-    total_missing = missing_data_count.sum()
-    percent_missing = round((total_missing / total_cells) * 100, 2)
-    print(f"Initial missing data: {percent_missing}%")
-    print("Missing values per column:")
-    print(missing_data_count)
+    # Compute running balance
+    df['Balance'] = df['Amount'].fillna(0).cumsum().round(2)
 
-    # Clean Date column
-    bank_data['Date'] = bank_data['Date'].apply(standardize_date)
-    bank_data['Date'] = pd.to_datetime(bank_data['Date'], format='%d/%m/%y', errors='coerce')
-    bank_data['Date'] = bank_data['Date'].ffill()
+    # Flag anomalies: transactions with absolute value > mean_abs + 3*std_abs
+    abs_stats = df['Amount'].abs().dropna()
+    if not abs_stats.empty:
+        mean_abs = abs_stats.mean()
+        std_abs = abs_stats.std(ddof=0)
+        threshold = mean_abs + 3 * (std_abs if not np.isnan(std_abs) else 0)
+        df['Anomaly'] = df['Amount'].abs().apply(lambda x: bool(x > threshold) if not pd.isna(x) else False)
+    else:
+        df['Anomaly'] = False
 
-    # Clean Description column
-    bank_data['Description'] = bank_data['Description'].fillna('Unspecified').astype('string')
-    bank_data['Description'] = bank_data['Description'].replace('nan', 'Unspecified').str.strip()
+    return df
 
-    # Clean Amount column
-    bank_data['Amount'] = bank_data['Amount'].apply(clean_amount)
-    bank_data['Amount'] = bank_data['Amount'].interpolate(method='linear').round(2)
+def monthly_summary(df):
+    df2 = df.copy()
+    df2 = df2[df2['Date'].notna()]
+    df2['Month'] = df2['Date'].dt.to_period('M').astype(str)
+    summary = df2.groupby('Month').agg(
+        transactions=('Amount', 'count'),
+        total_income=('Amount', lambda x: x[x>0].sum()),
+        total_expense=('Amount', lambda x: x[x<0].sum()),
+        net=('Amount', 'sum')
+    ).reset_index()
+    # category breakdown per month (top categories)
+    cat_breakdown = df2.groupby(['Month', 'Category'])['Amount'].sum().reset_index()
+    return summary, cat_breakdown
 
-    # Clean Category column
-    valid_categories = ['Groceries', 'Utilities', 'Entertainment', 'Salary', 'Rent', 'Unspecified']
-    synonym_map = {
-        'Groceries': ['food', 'grocery', 'grocreies', 'supermarket', 'market'],
-        'Utilities': ['bills', 'uti', 'utility', 'gas', 'electricity', 'water', 'phone', 'internet'],
-        'Entertainment': ['fun', 'entervtainment', 'dining', 'movie', 'concert', 'streaming'],
-        'Salary': ['income', 'salaray', 'wages', 'payroll', 'paycheck', 'freelance'],
-        'Rent': ['housing', 'landlord', 'lease', 'rent']
-    }
-    synonym_to_category = {syn.lower(): cat for cat, syn_list in synonym_map.items() for syn in syn_list}
-    bank_data['Category'] = bank_data['Category'].fillna('Unspecified').apply(
-        lambda x: clean_category(x, valid_categories, synonym_to_category)
-    )
+def save_outputs(df, summary, cat_breakdown):
+    logging.info(f"Saving cleaned data to: {CLEANED_CSV}")
+    df.to_csv(CLEANED_CSV, index=False, date_format='%Y-%m-%d')
+    logging.info(f"Saving monthly summary to: {MONTHLY_SUMMARY_CSV}")
+    # combine summary and top categories per month for a compact CSV
+    # we'll save summary and a separate category breakdown
+    summary.to_csv(MONTHLY_SUMMARY_CSV, index=False)
+    cat_breakdown.to_csv(os.path.join(CLEAN_DIR, 'category_breakdown_by_month.csv'), index=False)
 
-    # Clean Account column
-    bank_data['Account'] = bank_data['Account'].fillna('Unspecified').astype(str)
-    bank_data['Account'] = bank_data['Account'].replace('nan', 'Unspecified').str.strip()
+def main():
+    df = load_and_clean(RAW_PATH)
+    summary, cat_breakdown = monthly_summary(df)
+    save_outputs(df, summary, cat_breakdown)
+    logging.info("Cleaning complete.")
+    # brief stdout summary
+    print("Sample cleaned rows:")
+    print(df.head().to_string(index=False))
+    print("\nMonthly summary:")
+    print(summary.head().to_string(index=False))
+    total_income = df[df['Amount'] > 0]['Amount'].sum()
+    total_expense = df[df['Amount'] < 0]['Amount'].sum()
+    final_balance = df['Balance'].iloc[-1] if not df.empty else 0
+    print(f"\nTotal Income: {total_income:.2f}")
+    print(f"Total Expenses: {total_expense:.2f}")
+    print(f"Final Balance: {final_balance:.2f}")
 
-    # Ensure output directory exists
-    os.makedirs(output_dir, exist_ok=True)
-
-    # Export cleaned datasets
-    bank_data.to_csv(os.path.join(output_dir, 'bank_data_with_leeway.csv'), index=False)
-    bank_data_improved = perfect_cleanup(bank_data)
-    bank_data_improved.to_csv(os.path.join(output_dir, 'bank_data_no_leeway.csv'), index=False)
-    sorted_bank_data = bank_data_improved.sort_values(by='Date').reset_index(drop=True)
-    sorted_bank_data.to_csv(os.path.join(output_dir, 'bank_data_sorted_nl.csv'), index=False)
-
-    print("Cleaned datasets exported successfully to", output_dir)
-
-if __name__ == "__main__":
-    input_file = '../data/raw/bank_statements_2025.csv'
-    output_directory = '../data/cleaned'
-    clean_bank_data(input_file, output_directory)
+if __name__ == '__main__':
+    main()

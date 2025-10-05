@@ -1,52 +1,38 @@
-# Bank Statements Data Cleaning
+# Personal Finance Tracker — Bank Statements Cleanup
 
-## Overview
+This repository provides an automated cleaning pipeline for messy bank statement exports (2025). The goal is to convert inconsistent raw CSV exports into a reliable, analysis-ready dataset to simplify monthly budgeting.
 
-This project provides a Python script (`cleanup.py`) to clean a bank statements dataset from 2025. The script standardizes data formats, handles missing values, corrects inconsistencies, and exports three versions of the cleaned data:
-- `bank_data_with_leeway.csv`: Preserves all data with missing values filled.
-- `bank_data_no_leeway.csv`: Drops rows with any remaining missing values (except for interpolated amounts).
-- `bank_data_sorted_nl.csv`: Same as no-leeway but sorted by date.
+## Key features
+- Robust date parsing and normalization (YYYY-MM-DD)
+- Description cleanup (reverse obfuscation, trim)
+- Amount normalization (remove non-numeric chars, interpolate missing values)
+- Category standardization via synonyms and fuzzy/close matching
+- Running balance calculation and anomaly flagging
+- Monthly summary and category breakdown exports
 
-The dataset is expected to have columns: `Date`, `Description`, `Amount`, `Category`, and `Account`.
+## Inputs
+- `data/raw/messy_bank_statements.csv` — raw export with columns such as Date, Description, Amount, Category (case/typo variations expected).
 
-## Prerequisites
+## Outputs (written to `data/cleaned/`)
+- `cleaned_bank_statements.csv` — cleaned transactions with Date, Description, Amount, Category, Balance, Anomaly
+- `monthly_summary.csv` — per-month transaction counts, total income, total expenses, net
+- `category_breakdown_by_month.csv` — category totals per month
 
-- Python 3.8+
-- Required libraries:
-  ```bash
-  pip install pandas numpy charset-normalizer python-dateutil fuzzywuzzy
-  ```
-
-## Usage
-
-1. **Prepare the Input Data**:
-   - Place the raw dataset (`bank_statements_2025.csv`) in the `data/raw/` directory.
-   - Ensure the CSV file has the expected columns: `Date`, `Description`, `Amount`, `Category`, `Account`.
-
-2. **Run the Script**:
+## Quick start
+1. Install dependencies:
    ```bash
-   python cleanup.py
+   pip install pandas numpy python-dateutil
    ```
 
-3. **Output**:
-   - Cleaned datasets are saved in the `data/cleaned/` directory.
-   - The script prints:
-     - File encoding details.
-     - Initial missing data statistics.
-     - Confirmation of successful export.
+2. Run the cleaning script from the project root:
+   ```bash
+   python scripts/cleanup.py
+   ```
 
-## Cleaning Process
-
-1. **File Encoding Check**: Verifies the input CSV's encoding using `charset_normalizer`.
-2. **Date Standardization**: Converts dates to `DD/MM/YY` format and fills missing dates with forward-fill.
-3. **Description Cleaning**: Fills missing values with 'Unspecified', converts to string, and trims whitespace.
-4. **Amount Cleaning**: Removes non-numeric characters, rounds to 2 decimals, and interpolates missing values.
-5. **Category Standardization**: Uses fuzzy matching with an expanded synonym map to correct typos and inconsistencies.
-6. **Account Cleaning**: Fills missing values with 'Unspecified' and standardizes to string format.
-7. **Export**: Saves three versions of the cleaned data as described above.
+3. Open the notebook to run and inspect results:
+   `notebooks/cleanup.ipynb`
 
 ## Notes
-
-- The script assumes the input file is in `../data/raw/bank_statements_2025.csv`. Modify the `input_file` path in the script if needed.
-- Output files are saved to `../data/cleaned/`. The directory is created if it doesn't exist.
-- The script uses `fuzzywuzzy` for category standardization, which may require additional computational resources for large datasets.
+- The script is conservative with missing amounts: it preserves NaNs and interpolates when possible.
+- Category mapping uses a synonym list and difflib-based matching to avoid extra dependencies.
+- Customize `SYNONYM_MAP` and `VALID_CATEGORIES` inside `scripts/cleanup.py` to fit your merchant/category mappings.
