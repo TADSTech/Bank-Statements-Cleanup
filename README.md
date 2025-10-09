@@ -21,7 +21,7 @@ This repository provides an automated cleaning pipeline for messy bank statement
 ## Quick start
 1. Install dependencies:
    ```bash
-   pip install pandas numpy python-dateutil
+   pip install -r requirements.txt
    ```
 
 2. Run the cleaning script from the project root:
